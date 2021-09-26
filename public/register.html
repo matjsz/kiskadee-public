@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kiskadee | Sign Up</title>
+
+        <script defer src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
+        <script defer src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
+        <script defer src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
+
+        <script defer src="/js/auth0SessionCheckerLogin.js"></script>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="/css/kiskadee.css">
+    </head>
+    <body style="overflow-x: hidden;">
+        <div class="row" style="height: 100%">
+            <div class="col" style="background-image: url('/media/loginBackground.svg'); background-size: cover;">
+                <p class="display-4 text-white mt-5 mx-5">Ready to start something new?</p>
+				<p class="lead text-white mt-3 text-center">Join the community and share your ideas!</p>
+            </div>
+            <div class="col-8 bg-primary" style="background-image: url('/media/registerFormBackground.svg'); background-size: cover; height: 100%;">
+                <div class="modal modal-signin position-static d-block mt-5" tabindex="-1" role="dialog" id="modalSignin">
+                    <div class="modal-dialog" role="document">
+						<div class="modal-content shadow" style="border-radius: .75rem;">
+							<div class="modal-header p-5 pb-4 border-bottom-0">
+							<!-- <h5 class="modal-title">Modal title</h5> -->
+							<h2 class="fw-bold mb-0">Sign Up</h2>
+							</div>
+					
+							<div class="modal-body p-5 pt-0">
+								<form class="" action="register/create" method="post">
+									<p cass="mb-3">Already have an account? <a href="/login">Sign in</a></p>
+									<div class="form-floating mb-3">
+										<input type="email" class="form-control" style="border-radius: .5rem;" id="userEmail" name="userEmail" placeholder="name@example.com">
+										<label for="userEmail">Email address</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input type="password" class="form-control" style="border-radius: .5rem;" id="userPassword" name="userPassword" placeholder="Password">
+										<label for="userPassword">Password</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" style="border-radius: .5rem;" id="userNickname" name="userNickname" placeholder="Password">
+										<label for="userNickname">Nickname</label>
+									</div>
+									<div class="form-floating mb-3" style="border-radius: .5rem;">
+										<select class="form-select" id="userGender" name="userGender" aria-label="Gender">
+											<option value="male">Male</option>
+											<option value="female">Female</option>
+											<option value="other">Other</option>
+										</select>
+										<label for="floatingSelect">Gender</label>
+									</div>
+
+									<p class="lead fw-bold">Create an avatar!</p>
+									<div class="form-check mb-3">
+										<input class="form-check-input" type="checkbox" value="true" id="generateRandomAvatar" name="generateRandomAvatar">
+										<label class="form-check-label" for="generateRandomAvatar">
+											Generate a random avatar
+										</label>
+									</div>
+									
+									<div class="mb-3" id="avatarFace">
+										<p>Skin</p>
+										<input type="radio" value="variant01" class="btn-check" name="avatarFace" id="face1" autocomplete="off" checked>
+										<label class="btn btn-outline-primary mb-1" for="face1"><img src="/media/face1.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="variant02" class="btn-check" name="avatarFace" id="face2" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="face2"><img src="/media/face2.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="variant03" class="btn-check" name="avatarFace" id="face3" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="face3"><img src="/media/face3.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="variant04" class="btn-check" name="avatarFace" id="face4" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="face4"><img src="/media/face4.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="variant05" class="btn-check" name="avatarFace" id="face5" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="face5"><img src="/media/face5.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="variant06" class="btn-check" name="avatarFace" id="face6" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="face6"><img src="/media/face6.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="variant07" class="btn-check" name="avatarFace" id="face7" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="face7"><img src="/media/face7.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="variant08" class="btn-check" name="avatarFace" id="face8" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="face8"><img src="/media/face8.svg" height="80rem" width="70rem" alt=""></label>
+									</div>
+
+									<div class="mb-3" id="avatarHair">
+										<p>Hair</p>
+										<input type="radio" value="curlyShortHair" class="btn-check" name="avatarHair" id="curlyShort" autocomplete="off" checked>
+										<label class="btn btn-outline-primary mb-1" for="curlyShort"><img src="/media/curlyShot.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="halfShavedHead" class="btn-check" name="avatarHair" id="halfShaved" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="halfShaved"><img src="/media/halfShaved.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="bangs" class="btn-check" name="avatarHair" id="bangs" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="bangs"><img src="/media/bangs.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="froBun" class="btn-check" name="avatarHair" id="froBun" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="froBun"><img src="/media/froBun.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="bunHair" class="btn-check" name="avatarHair" id="bunHair" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="bunHair"><img src="/media/bunHair.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="shavedHead" class="btn-check" name="avatarHair" id="shaved" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="shaved"><img src="/media/shaved.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="braids" class="btn-check" name="avatarHair" id="braids" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="braids"><img src="/media/braids.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="straightHair" class="btn-check" name="avatarHair" id="straight" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="straight"><img src="/media/straight.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="curlyBob" class="btn-check" name="avatarHair" id="curlyBob" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="curlyBob"><img src="/media/curlyBob.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="bowlCutHair" class="btn-check" name="avatarHair" id="bowl" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="bowl"><img src="/media/bowl.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="wavyBob" class="btn-check" name="avatarHair" id="wavyBob" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="wavyBob"><img src="/media/wavyBob.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="mohawk" class="btn-check" name="avatarHair" id="mohawk" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="mohawk"><img src="/media/mohawk.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="shortHair" class="btn-check" name="avatarHair" id="short" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="short"><img src="/media/short.svg" height="80rem" width="70rem" alt=""></label>
+									</div>
+
+									<div class="mb-3" id="avatarHairColor">
+										<p>Hair Color</p>
+										<input type="radio" value="variant01" class="btn-check" name="avatarHairColor" id="variant01" autocomplete="off" checked>
+										<label class="btn btn-outline-primary mb-1" for="variant01"><div style="background-color: #2B1200;">&emsp;&emsp;</div></label>
+										<input type="radio" value="variant02" class="btn-check" name="avatarHairColor" id="variant02" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="variant02"><div style="background-color: #3A1A00;">&emsp;&emsp;</div></label>
+										<input type="radio" value="variant03" class="btn-check" name="avatarHairColor" id="variant03" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="variant03"><div style="background-color: #71472D;">&emsp;&emsp;</div></label>
+										<input type="radio" value="variant04" class="btn-check" name="avatarHairColor" id="variant04" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="variant04"><div style="background-color: #D9AC74;">&emsp;&emsp;</div></label>
+										<input type="radio" value="variant05" class="btn-check" name="avatarHairColor" id="variant05" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="variant05"><div style="background-color: #605DE4;">&emsp;&emsp;</div></label>
+										<input type="radio" value="variant06" class="btn-check" name="avatarHairColor" id="variant06" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="variant06"><div style="background-color: #238D81;">&emsp;&emsp;</div></label>
+										<input type="radio" value="variant07" class="btn-check" name="avatarHairColor" id="variant07" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="variant07"><div style="background-color: #D46C0C;">&emsp;&emsp;</div></label>
+										<input type="radio" value="variant08" class="btn-check" name="avatarHairColor" id="variant08" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="variant08"><div style="background-color: #E9B729;">&emsp;&emsp;</div></label>
+									</div>
+
+									<div class="mb-3" id="avatarEyes">
+										<p>Eyes</p>
+										<input type="radio" value="cheery" class="btn-check" name="avatarEyes" id="cheery" autocomplete="off" checked>
+										<label class="btn btn-outline-primary mb-1" for="cheery"><img src="/media/cheery.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="normal" class="btn-check" name="avatarEyes" id="normal" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="normal"><img src="/media/normal.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="confused" class="btn-check" name="avatarEyes" id="confused" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="confused"><img src="/media/confused.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="starstruck" class="btn-check" name="avatarEyes" id="starstruck" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="starstruck"><img src="/media/starstruck.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="winking" class="btn-check" name="avatarEyes" id="winking" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="winking"><img src="/media/winking.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="sleepy" class="btn-check" name="avatarEyes" id="sleepy" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="sleepy"><img src="/media/sleepy.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="sad" class="btn-check" name="avatarEyes" id="sad" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="sad"><img src="/media/sad.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="angry" class="btn-check" name="avatarEyes" id="angry" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="angry"><img src="/media/angry.svg" height="80rem" width="70rem" alt=""></label>
+									</div>
+
+									<div class="mb-3" id="avatarMouth">
+										<p>Mouth</p>
+										<input type="radio" value="openedSmile" class="btn-check" name="avatarMouth" id="opened" autocomplete="off" checked>
+										<label class="btn btn-outline-primary mb-1" for="opened"><img src="/media/opened.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="unimpressed" class="btn-check" name="avatarMouth" id="unimpressed" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="unimpressed"><img src="/media/unimpressed.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="gapSmile" class="btn-check" name="avatarMouth" id="gap" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="gap"><img src="/media/gap.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="openSad" class="btn-check" name="avatarMouth" id="openSad" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="openSad"><img src="/media/openSad.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="teethSmile" class="btn-check" name="avatarMouth" id="teeth" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="teeth"><img src="/media/teeth.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="awkwardSmile" class="btn-check" name="avatarMouth" id="awkward" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="awkward"><img src="/media/awkward.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="braces" class="btn-check" name="avatarMouth" id="braces" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="braces"><img src="/media/braces.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="kawaii" class="btn-check" name="avatarMouth" id="kawaii" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="kawaii"><img src="/media/kawaii.svg" height="80rem" width="70rem" alt=""></label>
+									</div>
+
+									<div class="mb-3" id="avatarAccessories">
+										<p>Accessories</p>
+										<input type="radio" value="catEars" class="btn-check" name="avatarAccessories" id="catEars" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="catEars"><img src="/media/catEars.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="glasses" class="btn-check" name="avatarAccessories" id="glasses" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="glasses"><img src="/media/glasses.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="sailormoonCrown" class="btn-check" name="avatarAccessories" id="sailormoon" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="sailormoon"><img src="/media/sailormoon.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="clownNose" class="btn-check" name="avatarAccessories" id="clown" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="clown"><img src="/media/clown.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="sleepMask" class="btn-check" name="avatarAccessories" id="sleepMask" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="sleepMask"><img src="/media/sleepMask.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="sunglasses" class="btn-check" name="avatarAccessories" id="sunglasses" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="sunglasses"><img src="/media/sunglasses.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="faceMask" class="btn-check" name="avatarAccessories" id="faceMask" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="faceMask"><img src="/media/faceMask.svg" height="80rem" width="70rem" alt=""></label>
+										<input type="radio" value="mustache" class="btn-check" name="avatarAccessories" id="mustache" autocomplete="off">
+										<label class="btn btn-outline-primary mb-1" for="mustache"><img src="/media/mustache.svg" height="80rem" width="70rem" alt=""></label>
+									</div>
+
+									<button class="w-100 mb-2 btn btn-lg btn-secondary" style="border-radius: .5rem;" type="submit">Register</button>
+								</form>
+							</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <form action="register/create" method="post">
+            Email: <input type="email" name="userEmail" id="userEmail" required>
+            Password: <input type="password" name="userPassword" id="userPassword" required>
+            Nickname: <input type="text" name="userNickname" id="userNickname" required>
+            <input type="submit">
+        </form> -->
+    </body>
+</html>
