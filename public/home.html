@@ -6,20 +6,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kiskadee</title>
 
+    <!-- Firebase -->
     <script defer src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
 
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <!-- Babel -->
+    <script defer src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- ReactJS -->
+    <script defer crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script defer crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- SCSS -->
+    <link rel="stylesheet" href="/css/kiskadee.css">
+
+    <!-- Kiskadee Utils -->
     <script defer src="/js/auth0SessionChecker.js"></script>
-    <script defer src="/js/kiskaHandler.js"></script>
+    <script defer src="/js/kiskaUtils.js"></script>
+    <script defer type="text/babel" src="/js/kiskaHandler.js"></script>
 </head>
-<body>
-    New Kiska: <input type="text" name="newKiska" id="newKiska">
-    <button onclick="sendNewKiska(document.getElementById('newKiska').value)">Send</button>
-
-    <br>
-    <br>
-
-    <button onclick="logout()">logout</button>
+<body style="overflow-x: hidden;">
+    <div class="row">
+        <div class="d-flex flex-column position-fixed flex-shrink-0 p-3 bg-light" style="width: 18rem; height: 100vh;">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                <span class="fs-4">Kiskadee</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="#" class="nav-link placeholder-glow active" id="sidebarHome" aria-current="page">
+                        <!-- <i class="bi bi-house"></i>
+                        Home -->
+                        <span class="placeholder"><i class="bi bi-house"></i> Home</span>
+                        
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link placeholder-glow link-dark" id="sidebarTopics">
+                        <!-- <i class="bi bi-asterisk"></i>
+                        Topics -->
+                        <span class="placeholder"><i class="bi bi-asterisk"></i> Topics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link placeholder-glow link-dark" id="sidebarProfile">
+                        <!-- <i class="bi bi-person-circle"></i>
+                        My Profile -->
+                        <span class="placeholder"><i class="bi bi-person-circle"></i> My Profile</span>
+                    </a>
+                </li>
+            </ul>
+            <span class="badge bg-danger text-dark visually-hidden" id="emailVerifiedBadge">Please, <a id="emailVerifiedBadgeLink" href="" type="button" class="text-white" onclick="sendEmailVeify()">verify your email</a></span>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="sidebarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img alt="" width="32" height="32" class="rounded-circle me-2 placeholder" id="sidebarProfilePic">
+                    <strong class="placeholder-glow" id="sidebarProfileUsername"><span class="placeholder">Username</span></strong>
+                </a>
+                <small class="text-muted px-4 mx-3 placeholder-glow" id="sidebarProfileID"><span class="placeholder">@Username-ID</span></small>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="sidebarDropdown">
+                    <li><a class="dropdown-item" href="#">My Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><button class="btn btn-link dropdown-item" onclick="logout()">Sign out</a></li>
+                </ul>
+            </div>
+        </div>    
+        <div class="col" id="homeContent" style="margin-left: 17.5rem; margin-right: 18.2rem;">
+            <div class="form-floating m-2" id="newKiskaArea">
+                <textarea class="form-control" placeholder="Leave a comment here" id="newKiskaContent" style="height: 100px; resize: none;"></textarea>
+                <label for="newKiskaContent"><i class="bi bi-chat-right-quote"></i> New Kiska</label>
+                <button class="btn btn-primary" type="button" onclick="sendNewKiska(document.getElementById('newKiskaContent').value)">Send</button>
+            </div>
+        </div>
+        <div class="d-flex flex-column position-fixed flex-shrink-0 p-3 bg-light" style="width: 18rem; height: 100vh; right: 0;">
+            <form action="/search" method="get">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </form>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+            </ul>
+        </div>
+    </div>
 </body>
 </html>

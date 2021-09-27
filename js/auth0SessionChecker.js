@@ -10,7 +10,32 @@ const firebaseApp = firebase.initializeApp({
 
 firebaseApp.auth().onAuthStateChanged((user) => {
     if (user) {
-        document.body.insertAdjacentHTML('afterend', `<br><br>logged in as ${firebaseApp.auth().currentUser.displayName} | @${firebaseApp.auth().currentUser.uid}<br><img src='${firebaseApp.auth().currentUser.photoURL}' height='250px'>`)
+        // Sibebar Profile
+        var profilePic = document.getElementById('sidebarProfilePic')
+        var profileUsername = document.getElementById('sidebarProfileUsername')
+        var profileID = document.getElementById('sidebarProfileID')
+
+        profilePic.src = user.photoURL
+        profilePic.classList.remove('placeholder')
+        profileUsername.innerHTML = user.displayName
+        profileID.innerHTML = '@'+user.uid
+
+        // Sidebar
+        var sidebarHome = document.getElementById('sidebarHome')
+        var sidebarTopics = document.getElementById('sidebarTopics')
+        var sidebarProfile = document.getElementById('sidebarProfile')
+
+        sidebarHome.innerHTML = '<i class="bi bi-house"></i> Home'
+        sidebarHome.href = '/home'
+        sidebarTopics.innerHTML = '<i class="bi bi-asterisk"></i> Topics'
+        sidebarTopics.href = '/topics'
+        sidebarProfile.innerHTML = '<i class="bi bi-person-circle"></i> My Profile'
+        sidebarProfile.href = '/users/'+user.uid
+
+        if(user.emailVerified == false){
+            document.getElementById('emailVerifiedBadgeLink').href = `/verifyEmail?email=${user.email}`
+            document.getElementById('emailVerifiedBadge').classList.remove('visually-hidden')
+        }
     } else {
         window.location = "/login"
     }

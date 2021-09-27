@@ -6,12 +6,108 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Kiskadee | User Profile</title>
 
-        <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
+        <!-- Firebase -->
+        <script defer src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
+        <script defer src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
+        <script defer src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
+
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+        <!-- Babel -->
+        <script defer src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+        <!-- ReactJS -->
+        <script defer crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+        <script defer crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+        <!-- SCSS -->
+        <link rel="stylesheet" href="/css/kiskadee.css">
+
+        <link rel="stylesheet" href="/css/kiskadee.css">
+
+        <script defer src="/js/auth0SessionChecker.js"></script>
+        <script defer type="text/babel" src="/js/userProfileGather.js"></script>
     </head>
-    <body>
-        user found!
+    <body style="overflow-x: hidden;">
+        <div class="row">
+            <div class="d-flex position-fixed flex-column flex-shrink-0 p-3 bg-light" style="width: 18rem; height: 100vh;">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                    <span class="fs-4">Kiskadee</span>
+                </a>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link placeholder-glow link-dark" id="sidebarHome">
+                            <!-- <i class="bi bi-house"></i>
+                            Home -->
+                            <span class="placeholder"><i class="bi bi-house"></i> Home</span>
+                            
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link placeholder-glow link-dark" id="sidebarTopics">
+                            <!-- <i class="bi bi-asterisk"></i>
+                            Topics -->
+                            <span class="placeholder"><i class="bi bi-asterisk"></i> Topics</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link placeholder-glow" id="sidebarProfile">
+                            <!-- <i class="bi bi-person-circle"></i>
+                            My Profile -->
+                            <span class="placeholder"><i class="bi bi-person-circle"></i> My Profile</span>
+                        </a>
+                    </li>
+                </ul>
+                <span class="badge bg-danger text-dark visually-hidden" id="emailVerifiedBadge">Please, <a id="emailVerifiedBadgeLink" href="" type="button" class="text-white" onclick="sendEmailVeify()">verify your email</a></span>
+                <hr>
+                <div class="dropdown">
+                    <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="sidebarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img alt="" width="32" height="32" class="rounded-circle me-2 placeholder" id="sidebarProfilePic">
+                        <strong class="placeholder-glow" id="sidebarProfileUsername"><span class="placeholder">Username</span></strong>
+                    </a>
+                    <small class="text-muted px-4 mx-3 placeholder-glow" id="sidebarProfileID"><span class="placeholder">@Username-ID</span></small>
+                    <ul class="dropdown-menu text-small shadow" aria-labelledby="sidebarDropdown">
+                        <li><a class="dropdown-item" href="#">My Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><button class="btn btn-link dropdown-item" onclick="logout()">Sign out</a></li>
+                    </ul>
+                </div>
+            </div>    
+            <div class="col" id="profileContent" style="margin-left: 18rem; margin-right: 19rem;">
+                <div id="profileHeader" class="shadow">
+                    <div id="profileBanner" style="background-color: wheat; width: 100%; height: 14rem">&emsp;</div>
+                    <div id="profilePhoto">
+                        <img alt="" width="128" height="128" class="rounded-circle me-2 placeholder position-absolute" style="top: 10rem; left: 20rem;" id="profilePhotoImg">
+                    </div>
+                    <div id="followButton">
+                        <button class="btn btn-outline-primary btn-lg position-absolute" style="border-radius: 1.75rem; right: 20rem; top: 15rem;" id="followButtonBtn">Follow</button>
+                    </div>
+                    <div id="profileNames">
+                        <p class="fs-3 mb-0 placeholder-glow" style="margin-top: 5rem; margin-left: 2.5rem;" id="profileUsername"><span class="placeholder">Username</span></p>
+                        <p class="fs-5 text-muted pb-4 placeholder-glow" style="margin-top: 0; margin-left: 2.5rem;" id="profileUsernameID"><span class="placeholder">@Username</span></p>
+                    </div>
+                </div>
+                <div id="profileKiskas">
+                </div>
+            </div>
+            <div class="d-flex position-fixed flex-column flex-shrink-0 p-3 bg-light" style="width: 18rem; height: 100vh; right: 0;">
+                <form action="/search" method="get">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </form>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                </ul>
+            </div>
+        </div>
 
         <script defer src="/js/userProfileGather.js"></script>
     </body>

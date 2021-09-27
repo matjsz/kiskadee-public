@@ -15,12 +15,25 @@
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
         <link rel="stylesheet" href="/css/kiskadee.css">
+
+		<style>
+			#goBack{
+				font-size: 3rem;
+				transition: font-size .5s;
+			}
+
+			#goBack:hover{
+				font-size: 3.3rem;
+			}
+		</style>
     </head>
     <body style="overflow: hidden;">
-        <div class="row" style="height: 100vh;">
+        <div class="row" style="height: 120vh;">
             <div class="col-8 bg-primary" style="background-image: url('/media/loginFormBackground.svg'); background-size: cover;">
+				<a href="/" id="goBack"><i class="bi bi-arrow-left text-white m-3"></i></a>
                 <div class="modal modal-signin position-static d-block mt-5" tabindex="-1" role="dialog" id="modalSignin">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content shadow" style="border-radius: .75rem;">
@@ -52,10 +65,5 @@
 				<p class="lead text-white mt-3 text-center spinner-border" style="margin-left: 45%;" id="kiskers"></p>
             </div>
         </div>
-        <!-- <form action="login/authenticate" method="get">
-            Email: <input type="email" name="userEmail" id="userEmail">
-            Password: <input type="password" name="userPassword" id="userPassword">
-            <input type="submit">
-        </form> -->
     </body>
 </html>
