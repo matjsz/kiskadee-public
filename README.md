@@ -16,6 +16,7 @@
 
 - HTML, CSS, JS;
 - Node.js (Express);
+- ReactJS;
 - Firebase (Authentication, Firestore);
 - Bootstrap
 - SCSS
